@@ -1,0 +1,7 @@
+This is the Git repository for the VIGoV Subatomic Particle Simulator, distributed in the hope that it will be useful, but with no warranty.
+As it is, this is pretty much ready-to-compile, once you use the Valve Project Creator (in the manner specified in the SDK setup instructions at https://developer.valvesoftware.com/wiki/Source_SDK_2013
+The server binaries will be placed in the sp/game/vigov_simulator folder. This can be copied into Steam's sourcemods directory, but you will need the client and shader binaries from the mod_episodic folder as well.
+
+I apologise, but this may be distributed ONLY in source form. This is due to incompatibilities between the GPL (used in the GNU Scientific Library) and all the other licences in the SDK.
+I did not realise this when I started programming, and hopefully I can sort it out by using a different library some day.
+Once again, PLEASE DO NOT DISTRIBUTE BINARIES!

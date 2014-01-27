@@ -1,3 +1,9 @@
+The VIGoV Particle Simulator makes use of the GNU Scientific Library, which is licensed
+under the GNU GPL. Essentially, this means that I can work with this code, but not
+distribute any binaries, since a lot of the code in this SDK is GPL-incompatible.
+The same goes for a user: Work with the VIGoV code if you want, but PLEASE DO NOT
+DISTRIBUTE ANY BINARIES!
+
 The Source engine and Valve games use Third Party code for certain functions.  The 
 required legal notices for using such code are reproduced below in accordance with 
 Valve’s obligations to provide such notices:

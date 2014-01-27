@@ -1,0 +1,51 @@
+coerce.lo: coerce.c ../config.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/math.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/features.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/predefs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/sys/cdefs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/wordsize.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs-32.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_val.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_valf.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_vall.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/inf.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/nan.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathdef.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathcalls.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathinline.h \
+ ../gsl/gsl_sys.h
+
+../config.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/math.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/features.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/predefs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/sys/cdefs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/wordsize.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs-32.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_val.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_valf.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/huge_vall.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/inf.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/nan.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathdef.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathcalls.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/mathinline.h:
+
+../gsl/gsl_sys.h:

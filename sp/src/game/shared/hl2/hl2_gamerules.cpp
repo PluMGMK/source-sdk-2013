@@ -279,6 +279,13 @@ ConVar  alyx_darkness_force( "alyx_darkness_force", "0", FCVAR_CHEAT | FCVAR_REP
 	//-----------------------------------------------------------------------------
 	void CHalfLife2::PlayerSpawn( CBasePlayer *pPlayer )
 	{
+		#if VIGOV_SIMULATOR && GAME_DLL //Not on client!
+		//Player always flies through map in the subatomic particle simulator
+		pPlayer->SetParent( NULL );
+		pPlayer->SetMoveType( MOVETYPE_NOCLIP );
+		ClientPrint( pPlayer, HUD_PRINTCONSOLE, "noclip ON\n");
+		pPlayer->AddEFlags( EFL_NOCLIP_ACTIVE );
+		#endif
 	}
 
 	//-----------------------------------------------------------------------------

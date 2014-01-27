@@ -1,0 +1,59 @@
+prec.lo: prec.c ../config.h ../gsl/gsl_machine.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include-fixed/limits.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include-fixed/syslimits.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/limits.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/features.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/predefs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/sys/cdefs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/wordsize.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs-32.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/posix1_lim.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/local_lim.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/linux/limits.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/posix2_lim.h \
+ /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include/float.h \
+ ../build.h ../gsl/gsl_precision.h ../gsl/gsl_types.h ../gsl/gsl_mode.h \
+ ../gsl/gsl_inline.h
+
+../config.h:
+
+../gsl/gsl_machine.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include-fixed/limits.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include-fixed/syslimits.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/limits.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/features.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/predefs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/sys/cdefs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/wordsize.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/gnu/stubs-32.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/posix1_lim.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/local_lim.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/linux/limits.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../i686-unknown-linux-gnu/sysroot/usr/include/bits/posix2_lim.h:
+
+/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/bin/../lib/gcc/i686-unknown-linux-gnu/4.6.3/include/float.h:
+
+../build.h:
+
+../gsl/gsl_precision.h:
+
+../gsl/gsl_types.h:
+
+../gsl/gsl_mode.h:
+
+../gsl/gsl_inline.h:

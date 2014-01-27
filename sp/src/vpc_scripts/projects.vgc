@@ -44,6 +44,7 @@ $Project "server"
 {
 	"game\server\server_hl2.vpc"		[($WIN32||$X360||$POSIX) && $HL2]
 	"game\server\server_episodic.vpc"	[($WIN32||$X360||$POSIX) && $EPISODIC]
+	"game\server\server_vigov.vpc"		[($WIN32||$X360||$POSIX)]
 }
 
 $Project "mathlib"

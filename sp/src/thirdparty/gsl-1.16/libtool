@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (gsl) 1.16
-# Libtool was configured on host mgkeyes-Mint:
+# Libtool was configured on host mint-debian:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -90,7 +90,7 @@ EGREP="/bin/grep -E"
 FGREP="/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
-NM="/home/mgkeyes/steam-runtime-sdk_2013-07-15/bin/nm -B"
+NM="/home/mgkeyes/steam-runtime-sdk_2013-09-05/bin/nm -B"
 
 # Whether we need soft or hard links.
 LN_S="ln -s"
@@ -272,10 +272,10 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/lib/gcc/i686-unknown-linux-gnu/4.6.3 /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/lib/gcc /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/lib /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sysroot/lib /home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sysroot/usr/lib /home/mgkeyes/steam-runtime-sdk_2013-07-15/runtime/i386/lib /home/mgkeyes/steam-runtime-sdk_2013-07-15/runtime/i386/lib/i386-linux-gnu /home/mgkeyes/steam-runtime-sdk_2013-07-15/runtime/i386/usr/lib /home/mgkeyes/steam-runtime-sdk_2013-07-15/runtime/i386/usr/lib/i386-linux-gnu "
+sys_lib_search_path_spec="/home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/lib/gcc/i686-unknown-linux-gnu/4.6.3 /home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/lib/gcc /home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/lib /home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sysroot/lib /home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/sysroot/usr/lib /home/mgkeyes/steam-runtime-sdk_2013-09-05/runtime/i386/lib /home/mgkeyes/steam-runtime-sdk_2013-09-05/runtime/i386/lib/i386-linux-gnu /home/mgkeyes/steam-runtime-sdk_2013-09-05/runtime/i386/usr/lib /home/mgkeyes/steam-runtime-sdk_2013-09-05/runtime/i386/usr/lib/i386-linux-gnu "
 
 # Run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i686-linux-gnu /usr/lib/i686-linux-gnu /usr/local/lib /usr/lib/nvidia-settings-319 /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/nvidia-319 /usr/lib32/nvidia-319 /lib32 /usr/lib32 /libx32 /usr/libx32 "
+sys_lib_dlsearch_path_spec="/lib /usr/lib /lib/i386-linux-gnu /usr/lib/i386-linux-gnu /lib/i486-linux-gnu /usr/lib/i486-linux-gnu /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /lib32 /usr/lib32 /libx32 /usr/libx32 "
 
 # Whether dlopen is supported.
 dlopen_support=unknown
@@ -292,7 +292,7 @@ striplib="strip --strip-unneeded"
 
 
 # The linker used to build libraries.
-LD="/home/mgkeyes/steam-runtime-sdk_2013-07-15/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/bin/ld -m elf_i386"
+LD="/home/mgkeyes/steam-runtime-sdk_2013-09-05/amd64/i686-unknown-linux-gnu/i686-unknown-linux-gnu/bin/ld -m elf_i386"
 
 # How to create reloadable object files.
 reload_flag=" -r"

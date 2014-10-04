@@ -41,6 +41,7 @@ $Project "mathlib"
 		$File	"simdvectormatrix.cpp"
 		$File	"vector.cpp"
 		$File	"vmatrix.cpp"
+		$File	"vigov_complex.cpp"
 		$File	"almostequal.cpp"
 	}
 
@@ -69,6 +70,7 @@ $Project "mathlib"
 		$File	"$SRCDIR\public\mathlib\vector.h"
 		$File	"$SRCDIR\public\mathlib\vector2d.h"
 		$File	"$SRCDIR\public\mathlib\vector4d.h"
+		$File	"$SRCDIR\public\mathlib\vigov_complex.h"
 		$File	"$SRCDIR\public\mathlib\vmatrix.h"
 		$File	"$SRCDIR\public\mathlib\vplane.h"
 	}

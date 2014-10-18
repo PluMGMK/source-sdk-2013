@@ -21,11 +21,9 @@
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_hyperg.h>
 #include <gsl/gsl_sf_laguerre.h>
-#include <gsl/gsl_complex_math.h>
-//#include <gsl/gsl_sf_legendre.h>
 
-//Obtained from http://joewalshe.net/2013/03/a-wrapper-for-complex-numbers-with-gsl/
-#include "complex_wrapper.h"
+//My own replacements for the above:
+#include "mathlib/vigov_complex.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -263,11 +261,11 @@ public:
 	void Annihilate(){m_bAnnihilating = true;}
 	
 	//Wavefunction components
-	complex g(int n, int k, double r, float flPotential);
-	complex f(int n, int k, double r, float flPotential);
+	ComplexNumber g(int n, int k, double r, float flPotential);
+	ComplexNumber f(int n, int k, double r, float flPotential);
 	
-	complex Y(double a, double b, Vector &vecDirection); //Spherical harmonic function
-	gsl_complex Psi(Vector vecLocation); //Particle wavefunction
+	ComplexNumber Y(int a, int b, Vector &vecDirection); //Spherical harmonic function
+	ComplexNumber Psi(Vector vecLocation); //Particle wavefunction
 	double Psi2(Vector vecLocation); //|Psi|^2
 	double DiagnosticIntegral(int iStart, int iEnd, int iCoarseness);
 	
@@ -772,7 +770,7 @@ float CBaseParticle::GetCharge(float *pflChargeInUnits) {
 }*/
 
 //In Planck units
-complex CBaseParticle::g(int n, int k, double r, float flPotential) {
+ComplexNumber CBaseParticle::g(int n, int k, double r, float flPotential) {
 	double C = sqrt(Square<double>(m_flRestEnergy / PLANCK_ENERGY) - Square<double>(m_flTotalEnergy / PLANCK_ENERGY));
 	double ZALPHA = -(flPotential / PLANCK_ENERGY) * (r / PLANCK_LENGTH);
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: Z*alpha is %.20f\n", entindex(), ZALPHA);}
@@ -780,23 +778,23 @@ complex CBaseParticle::g(int n, int k, double r, float flPotential) {
 		C = (ZALPHA / n) * (m_flRestEnergy / PLANCK_ENERGY);
 	}
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: C is %.20f\n", entindex(), C);}
-	double rho = 2*C*(r/PLANCK_LENGTH); //"Scaled radius"
+	double rho = 2.0f*C*(r/PLANCK_LENGTH); //"Scaled radius"
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: r is %.20f\n", entindex(), r);}
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: rho is %.20f\n", entindex(), rho);}
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: gamma is %.20f\n", entindex(), gamma);}
 	if( k==-n ) {
-		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma)));
+		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2.0f*gamma)));
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: n+gamma is %.20f, rho^gamma is %.20f, e^(-rho/2) is %.20f\n", entindex(), n+gamma, pow(rho, gamma), pow(M_E, -rho/2));}
-		return A * (n+gamma) * pow(rho, gamma) * pow(M_E, -rho/2);
+		return A * (n+gamma) * pow(rho, gamma) * pow(M_E, -rho/2.0f);
 	}
 	int absk = k>=0 ? k : -k;
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: |k| is %i\n", entindex(), absk);}
-	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY)) + (m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY))) );
+	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY)) + (m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY))) );
 	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
-	return A * pow(r, gamma) * pow(M_E, -rho/2) * ((ZALPHA * rho * gsl_sf_laguerre_n(n-absk-1, 2*gamma + 1, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(PLANCK_ENERGY*C)) * gsl_sf_laguerre_n(n-absk, 2*gamma + 1, rho)));
+	return A * pow(r, gamma) * pow(M_E, -rho/2.0f) * ((ZALPHA * rho * gsl_sf_laguerre_n(n-absk-1, 2.0f*gamma + 1.0f, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(PLANCK_ENERGY*C)) * gsl_sf_laguerre_n(n-absk, 2.0f*gamma + 1.0f, rho)));
 }
 
 /*complex CBaseParticle::f(int n, int k, double r, float flPotential) {
@@ -820,7 +818,7 @@ complex CBaseParticle::g(int n, int k, double r, float flPotential) {
 }*/
 
 //In Planck units
-complex CBaseParticle::f(int n, int k, double r, float flPotential) {
+ComplexNumber CBaseParticle::f(int n, int k, double r, float flPotential) {
 	double C = sqrt(Square<double>(m_flRestEnergy / PLANCK_ENERGY) - Square<double>(m_flTotalEnergy / PLANCK_ENERGY));
 	double ZALPHA = -(flPotential / PLANCK_ENERGY) * (r / PLANCK_LENGTH);
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: Z*alpha is %.20f\n", entindex(), ZALPHA);}
@@ -828,53 +826,37 @@ complex CBaseParticle::f(int n, int k, double r, float flPotential) {
 		C = (ZALPHA / n) * (m_flRestEnergy / PLANCK_ENERGY);
 	}
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: C is %.20f\n", entindex(), C);}
-	double rho = 2*C*(r/PLANCK_LENGTH); //"Scaled radius"
+	double rho = 2.0f*C*(r/PLANCK_LENGTH); //"Scaled radius"
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: r is %.20f\n", entindex(), r);}
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: rho is %.20f\n", entindex(), rho);}
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: gamma is %.20f\n", entindex(), gamma);}
 	if( k==-n ) {
-		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma)));
+		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2.0f*gamma)));
 		if(debug_wavefunctions.GetBool()){Msg("f on %i: A is %.20f\n", entindex(), A);}
 		if(debug_wavefunctions.GetBool()){Msg("f on %i: n+gamma is %.20f, rho^gamma is %.20f, e^(-rho/2) is %.20f\n", entindex(), n+gamma, pow(rho, gamma), pow(M_E, -rho/2));}
-		return A * ZALPHA * pow(rho, gamma) * pow(M_E, -rho/2);
+		return A * ZALPHA * pow(rho, gamma) * pow(M_E, -rho/2.0f);
 	}
 	int absk = k>=0 ? k : -k;
-	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
+	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
 	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
-	return A * pow(rho, gamma) * pow(M_E, -rho/2) * ((gamma-k) * rho * gsl_sf_laguerre_n(n-absk-1, 2*gamma + 1, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * gsl_sf_laguerre_n(n-absk, 2*gamma + 1, rho));
+	return A * pow(rho, gamma) * pow(M_E, -rho/2.0f) * ((gamma-k) * rho * gsl_sf_laguerre_n(n-absk-1, 2.0f*gamma + 1.0f, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * gsl_sf_laguerre_n(n-absk, 2.0f*gamma + 1.0f, rho));
 }
 
-complex CBaseParticle::Y(double a, double b, Vector &vecDirection) {
+ComplexNumber CBaseParticle::Y(int a, int b, Vector &vecDirection) {
 	if (a<0){
 		a = -a-1;
 	}
-	if(debug_wavefunctions.GetBool()){Msg("Y on %i: a is %.2f, b is %.2f\n", entindex(), a, b);}
+	if(debug_wavefunctions.GetBool()){Msg("Y on %i: a is %i, b is %i\n", entindex(), a, b);}
 	
-	//This is rather complicated. This function is supposed to be complex, yet Valve's function is real.
-	//On investigation, it turns out that Valve's function will return the real part when given a positive b-value, and the imaginary part when given a negative b-value.
-	//The actual function involves an e^i term, but Valve's has cos for positive b and sin for negative b.
-	//It also uses b in the cos but -b in the sin, confirming that this behaviour is designed to give real and imaginary parts.
-	//Unfortunately, the actual b-values we use can be either positive or negative.
-	//Therefore, we can first check if b is negative. Then, we can minus it as appropriate.
-	//There is also a (-1)^b term in the quantum mechanics function, which is not present in the Valve function
-	if(b < 0) {
-		//Simply pass -b to the real part, since cos(-x) = cos(x)
-		//Pass b to the imaginary part, but minus the answer, since sin(-x) = -sin(x)
-		return pow(-1, b) * complex(SphericalHarmonic(a, -b, vecDirection), -SphericalHarmonic(a, b, vecDirection));
-	} else if(b == 0) {
-		//The e^i term equals 1 in this case, so there is only a real component.
-		return pow(-1, b) * complex(SphericalHarmonic(a, b, vecDirection), 0);
-	} else {
-		//Pass b to the real part and -b to the imaginary part.
-		return pow(-1, b) * complex(SphericalHarmonic(a, b, vecDirection), SphericalHarmonic(a, -b, vecDirection));
-	}
+	int min1powB = (b % 2) ? -1 : 1; //-1 if odd, 1 if even - this factor appears in the quantum mechanics definition of this function.
+	return min1powB * CmpSphericalHarmonic(a, b, vecDirection);
 }
 
-gsl_complex CBaseParticle::Psi(Vector vecLocation) {
+ComplexNumber CBaseParticle::Psi(Vector vecLocation) {
 	if(m_bFree) {
 		//Solution to Dirac equation for free particle (e^(ip.x/h-bar)) - http://www.nyu.edu/classes/tuckerman/quant.mech/lectures/lecture_7/node1.html
-		return (pow(M_E, complex(0, DotProduct(m_vecMomentum, vecLocation) / DIRAC) )).gsl();
+		return ComplexNumber(1, DotProduct(m_vecMomentum, vecLocation) / DIRAC, true);
 	}
 	
 	//Calculate Potential Energy at this position:
@@ -914,27 +896,27 @@ gsl_complex CBaseParticle::Psi(Vector vecLocation) {
 	if(debug_wavefunctions.GetBool()){Msg("Psi on %i: j is %.1f, mj is %.1f\n", entindex(), j, m);}
 	if(debug_wavefunctions.GetBool()){Msg("Psi on %i: k is %.1f, |k| is %.1f\n", entindex(), k, absk);}
 	
-	complex Answer;
+	ComplexNumber Answer;
 	//Determine which one to use
 	if(!m_bAntiParticle) { //Positive energy is matter
 		if (m_flSpinProjection > 0){
 			if(debug_wavefunctions.GetBool()){Msg("Psi on %i: Spin-up, positive energy\n", entindex());}
 			//Spin-up, positive energy
-			Answer = g(m_iPrincipal,k,r,flPotential)/r * complex_sqrt((k+0.5f-m)/(2*k+1)) * Y(k, m-0.5f, vecDirection);
+			Answer = g(m_iPrincipal,k,r,flPotential)/r * COMPLEX_SQRT((k+0.5f-m)/(2*k+1)) * Y(k, m-0.5f, vecDirection);
 		} else {
 			if(debug_wavefunctions.GetBool()){Msg("Psi on %i: Spin-down, positive energy\n", entindex());}
 			//Spin-down, positive energy
-			Answer = -1.0f * g(m_iPrincipal,k,r,flPotential)/r * sgnk * complex_sqrt((k+0.5f+m)/(2*k+1)) * Y(k, m+0.5f, vecDirection);
+			Answer = -1.0f * g(m_iPrincipal,k,r,flPotential)/r * sgnk * COMPLEX_SQRT((k+0.5f+m)/(2*k+1)) * Y(k, m+0.5f, vecDirection);
 		}
 	} else { //Negative energy is antimatter
 		if (m_flSpinProjection > 0){
 			if(debug_wavefunctions.GetBool()){Msg("Psi on %i: Spin-up, negative energy\n", entindex());}
 			//Spin-up, negative energy
-			Answer = complex(0,1) * f(m_iPrincipal,k,r,flPotential)/r * complex_sqrt((-k+0.5f-m)/(-2*k+1)) * Y(-k, m-0.5f, vecDirection);
+			Answer = ComplexNumber(0,1) * f(m_iPrincipal,k,r,flPotential)/r * COMPLEX_SQRT((-k+0.5f-m)/(-2*k+1)) * Y(-k, m-0.5f, vecDirection);
 		} else {
 			if(debug_wavefunctions.GetBool()){Msg("Psi on %i: Spin-down, negative energy\n", entindex());}
 			//Spin-down, negative energy
-			Answer = complex(0,-1) * f(m_iPrincipal,k,r,flPotential)/r * sgnk * complex_sqrt((-k+0.5f-m)/(-2*k+1)) * Y(-k, m+0.5f, vecDirection);
+			Answer = ComplexNumber(0,-1) * f(m_iPrincipal,k,r,flPotential)/r * sgnk * COMPLEX_SQRT((-k+0.5f-m)/(-2*k+1)) * Y(-k, m+0.5f, vecDirection);
 		}
 	}
 	/*complex supe = g(m_iPrincipal,k,r,flPotential)/r * complex_sqrt((k+0.5f-m)/(2*k+1)) * Y(k, m-0.5f, vecDirection);
@@ -962,13 +944,13 @@ gsl_complex CBaseParticle::Psi(Vector vecLocation) {
 			Answer = sdne - sdpe;//(supe + sdpe + sune);
 		}
 	}*/
-	if(debug_wavefunctions.GetBool()){Msg("Psi on %i: About to return %.20f + (%.20f i)\n", entindex(), Answer.real(), Answer.im());}
+	if(debug_wavefunctions.GetBool()){Msg("Psi on %i: About to return %.20f + (%.20f i)\n", entindex(), Answer.x, Answer.y);}
 	
-	return Answer.gsl();
+	return Answer;
 }
 
 double CBaseParticle::Psi2(Vector vecLocation) {
-	return gsl_complex_abs2(Psi(vecLocation));// / pow(DISTANCE_SCALE/2, 3);
+	return Psi(vecLocation).LengthSqr();// / pow(DISTANCE_SCALE/2, 3);
 }
 
 //Integrate |Psi|^2 over a region using the trapezoidal rule

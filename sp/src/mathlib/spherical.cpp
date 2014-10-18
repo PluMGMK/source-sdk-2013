@@ -2,6 +2,8 @@
 //
 // Purpose: spherical math routines
 //
+// Edited by VIGoV: Added complex number routines
+//
 //=====================================================================================//
 
 #include <math.h>
@@ -12,6 +14,7 @@
 #include "mathlib/mathlib.h"
 #include "mathlib/vector.h"
 #include "mathlib/spherical_geometry.h"
+#include "mathlib/vigov_complex.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -120,5 +123,35 @@ float SphericalHarmonic( int nL, int nM, Vector const &vecDirection )
 		flTheta = atan2( vecDirection.y, vecDirection.x );
 	}
 	return SphericalHarmonic( nL, nM, flTheta, flPhi, cos( flTheta ) );
+}
+
+// VIGoV Complex Number functions:
+
+FORCEINLINE ComplexNumber CmpSphericalHarmonic( int nL, int nM, float flTheta, float flPhi, float flCosTheta )
+{
+	if ( nM == 0 )
+		return SHNormalizationFactor( nL, 0 ) * AssociatedLegendrePolynomial( nL, nM, flCosTheta );
+
+	return 
+		SQRT_2 * SHNormalizationFactor( nL, -nM ) * ComplexNumber(1.0f, nM * flPhi, true) /*e^(i*m*phi)*/ * AssociatedLegendrePolynomial( nL, -nM, flCosTheta );
+
+}
+
+ComplexNumber CmpSphericalHarmonic( int nL, int nM, float flTheta, float flPhi )
+{
+	return CmpSphericalHarmonic( nL, nM, flTheta, flPhi, cos( flTheta ) );
+}
+
+ComplexNumber CmpSphericalHarmonic( int nL, int nM, Vector const &vecDirection )
+{
+	Assert( fabs( VectorLength( vecDirection ) - 1.0 ) < 0.0001 );
+	float flPhi = acos( vecDirection.z );
+	float flTheta = 0;
+	float S = Square( vecDirection.x ) + Square( vecDirection.y );
+	if ( S > 0 )
+	{
+		flTheta = atan2( vecDirection.y, vecDirection.x );
+	}
+	return CmpSphericalHarmonic( nL, nM, flTheta, flPhi, cos( flTheta ) );
 }
 

@@ -1,4 +1,4 @@
-This is gsl-ref.info, produced by makeinfo version 5.1 from
+This is gsl-ref.info, produced by makeinfo version 5.2 from
 gsl-ref.texi.
 
 Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
@@ -19,8 +19,8 @@ Indirect:
 gsl-ref.info-1: 707
 gsl-ref.info-2: 301602
 gsl-ref.info-3: 601000
-gsl-ref.info-4: 902430
-gsl-ref.info-5: 1443412
+gsl-ref.info-4: 902431
+gsl-ref.info-5: 1443416
 
 Tag Table:
 (Indirect)
@@ -411,215 +411,215 @@ Node: Example statistical programs658165
 Node: Statistics References and Further Reading660825
 Node: Histograms662033
 Node: The histogram struct663886
-Node: Histogram allocation665690
-Node: Copying Histograms668647
-Node: Updating and accessing histogram elements669323
-Node: Searching histogram ranges672592
-Node: Histogram Statistics673592
-Node: Histogram Operations675458
-Node: Reading and writing histograms677533
-Node: Resampling from histograms680575
-Node: The histogram probability distribution struct681374
-Node: Example programs for histograms684408
-Node: Two dimensional histograms686471
-Node: The 2D histogram struct687192
-Node: 2D Histogram allocation689002
-Node: Copying 2D Histograms691076
-Node: Updating and accessing 2D histogram elements691781
-Node: Searching 2D histogram ranges695438
-Node: 2D Histogram Statistics696452
-Node: 2D Histogram Operations699317
-Node: Reading and writing 2D histograms701495
-Node: Resampling from 2D histograms705124
-Node: Example programs for 2D histograms708145
-Node: N-tuples709972
-Node: The ntuple struct711295
-Node: Creating ntuples711774
-Node: Opening an existing ntuple file712441
-Node: Writing ntuples713070
-Node: Reading ntuples713531
-Node: Closing an ntuple file713862
-Node: Histogramming ntuple values714202
-Node: Example ntuple programs716212
-Node: Ntuple References and Further Reading719541
-Node: Monte Carlo Integration719862
-Node: Monte Carlo Interface721173
-Node: PLAIN Monte Carlo723800
-Node: MISER726255
-Ref: MISER-Footnote-1732935
-Node: VEGAS733060
-Node: Monte Carlo Examples742621
-Node: Monte Carlo Integration References and Further Reading748608
-Node: Simulated Annealing749390
-Node: Simulated Annealing algorithm750606
-Node: Simulated Annealing functions751758
-Node: Examples with Simulated Annealing756288
-Node: Trivial example756857
-Node: Traveling Salesman Problem759508
-Node: Simulated Annealing References and Further Reading762821
-Node: Ordinary Differential Equations763232
-Node: Defining the ODE System764472
-Node: Stepping Functions767300
-Node: Adaptive Step-size Control774270
-Node: Evolution780347
-Node: Driver784476
-Node: ODE Example programs788710
-Node: ODE References and Further Reading793756
-Node: Interpolation795520
-Node: Introduction to Interpolation796721
-Node: Interpolation Functions797162
-Node: Interpolation Types798369
-Node: Index Look-up and Acceleration801091
-Node: Evaluation of Interpolating Functions803143
-Node: Higher-level Interface805639
-Node: Interpolation Example programs807679
-Node: Interpolation References and Further Reading810899
-Node: Numerical Differentiation811471
-Node: Numerical Differentiation functions812066
-Node: Numerical Differentiation Examples814923
-Node: Numerical Differentiation References816336
-Node: Chebyshev Approximations816887
-Node: Chebyshev Definitions817968
-Node: Creation and Calculation of Chebyshev Series818757
-Node: Auxiliary Functions for Chebyshev Series819742
-Node: Chebyshev Series Evaluation820482
-Node: Derivatives and Integrals821862
-Node: Chebyshev Approximation Examples823100
-Node: Chebyshev Approximation References and Further Reading824596
-Node: Series Acceleration825046
-Node: Acceleration functions825823
-Node: Acceleration functions without error estimation828150
-Node: Example of accelerating a series830774
-Node: Series Acceleration References833120
-Node: Wavelet Transforms834008
-Node: DWT Definitions834607
-Node: DWT Initialization835559
-Node: DWT Transform Functions838207
-Node: DWT in one dimension838758
-Node: DWT in two dimension840779
-Node: DWT Examples845358
-Node: DWT References847175
-Node: Discrete Hankel Transforms849339
-Node: Discrete Hankel Transform Definition849813
-Node: Discrete Hankel Transform Functions852016
-Node: Discrete Hankel Transform References853681
-Node: One dimensional Root-Finding854085
-Node: Root Finding Overview855391
-Node: Root Finding Caveats857247
-Node: Initializing the Solver859016
-Node: Providing the function to solve861649
-Node: Search Bounds and Guesses865203
-Node: Root Finding Iteration866066
-Node: Search Stopping Parameters867917
-Node: Root Bracketing Algorithms870428
-Node: Root Finding Algorithms using Derivatives873726
-Ref: Root Finding Algorithms using Derivatives-Footnote-1877269
-Node: Root Finding Examples877425
-Node: Root Finding References and Further Reading884713
-Node: One dimensional Minimization885352
-Node: Minimization Overview886695
-Node: Minimization Caveats888402
-Node: Initializing the Minimizer889740
-Node: Providing the function to minimize891981
-Node: Minimization Iteration892459
-Node: Minimization Stopping Parameters894597
-Node: Minimization Algorithms896202
-Node: Minimization Examples898796
-Node: Minimization References and Further Reading902430
-Node: Multidimensional Root-Finding902886
-Node: Overview of Multidimensional Root Finding904394
-Node: Initializing the Multidimensional Solver906581
-Node: Providing the multidimensional system of equations to solve909811
-Node: Iteration of the multidimensional solver914723
-Node: Search Stopping Parameters for the multidimensional solver917004
-Node: Algorithms using Derivatives918742
-Node: Algorithms without Derivatives923567
-Node: Example programs for Multidimensional Root finding926657
-Node: References and Further Reading for Multidimensional Root Finding935281
-Node: Multidimensional Minimization936520
-Node: Multimin Overview937930
-Node: Multimin Caveats940010
-Node: Initializing the Multidimensional Minimizer940759
-Node: Providing a function to minimize943993
-Node: Multimin Iteration948054
-Node: Multimin Stopping Criteria950248
-Node: Multimin Algorithms with Derivatives951819
-Node: Multimin Algorithms without Derivatives955350
-Node: Multimin Examples958352
-Node: Multimin References and Further Reading964922
-Node: Least-Squares Fitting965786
-Node: Fitting Overview966872
-Node: Linear regression969205
-Node: Linear fitting without a constant term971807
-Node: Multi-parameter fitting974001
-Node: Robust linear regression979860
-Node: Troubleshooting990108
-Node: Fitting Examples990731
-Node: Fitting References and Further Reading1001255
-Node: Nonlinear Least-Squares Fitting1002627
-Node: Overview of Nonlinear Least-Squares Fitting1004151
-Node: Initializing the Nonlinear Least-Squares Solver1005618
-Node: Providing the Function to be Minimized1008483
-Node: Finite Difference Jacobian1011946
-Node: Iteration of the Minimization Algorithm1013817
-Node: Search Stopping Parameters for Minimization Algorithms1015657
-Node: High Level Driver1017730
-Node: Minimization Algorithms using Derivatives1018636
-Ref: Minimization Algorithms using Derivatives-Footnote-11022084
-Node: Minimization Algorithms without Derivatives1022173
-Node: Computing the covariance matrix of best fit parameters1022565
-Node: Example programs for Nonlinear Least-Squares Fitting1024602
-Node: References and Further Reading for Nonlinear Least-Squares Fitting1032335
-Node: Basis Splines1033071
-Node: Overview of B-splines1033950
-Node: Initializing the B-splines solver1035266
-Node: Constructing the knots vector1036647
-Node: Evaluation of B-spline basis functions1037435
-Node: Evaluation of B-spline basis function derivatives1039083
-Node: Working with the Greville abscissae1041053
-Node: Example programs for B-splines1042047
-Node: References and Further Reading1046042
-Node: Physical Constants1046848
-Node: Fundamental Constants1048427
-Node: Astronomy and Astrophysics1049567
-Node: Atomic and Nuclear Physics1050232
-Node: Measurement of Time1051883
-Node: Imperial Units1052313
-Node: Speed and Nautical Units1052755
-Node: Printers Units1053259
-Node: Volume Area and Length1053582
-Node: Mass and Weight1054268
-Node: Thermal Energy and Power1055087
-Node: Pressure1055510
-Node: Viscosity1056123
-Node: Light and Illumination1056399
-Node: Radioactivity1056991
-Node: Force and Energy1057326
-Node: Prefixes1057730
-Node: Physical Constant Examples1058473
-Node: Physical Constant References and Further Reading1060262
-Node: IEEE floating-point arithmetic1060992
-Node: Representation of floating point numbers1061584
-Node: Setting up your IEEE environment1066070
-Node: IEEE References and Further Reading1073043
-Node: Debugging Numerical Programs1074203
-Node: Using gdb1074720
-Node: Examining floating point registers1078063
-Node: Handling floating point exceptions1079348
-Node: GCC warning options for numerical programs1080760
-Node: Debugging References1084708
-Node: Contributors to GSL1085420
-Node: Autoconf Macros1089914
-Node: GSL CBLAS Library1093946
-Node: Level 1 CBLAS Functions1094486
-Node: Level 2 CBLAS Functions1099788
-Node: Level 3 CBLAS Functions1116418
-Node: GSL CBLAS Examples1126080
-Node: GNU General Public License1127643
-Node: GNU Free Documentation License1165217
-Node: Function Index1190366
-Node: Variable Index1443412
-Node: Type Index1446715
-Node: Concept Index1461784
+Node: Histogram allocation665691
+Node: Copying Histograms668648
+Node: Updating and accessing histogram elements669324
+Node: Searching histogram ranges672593
+Node: Histogram Statistics673593
+Node: Histogram Operations675459
+Node: Reading and writing histograms677534
+Node: Resampling from histograms680576
+Node: The histogram probability distribution struct681375
+Node: Example programs for histograms684409
+Node: Two dimensional histograms686472
+Node: The 2D histogram struct687193
+Node: 2D Histogram allocation689003
+Node: Copying 2D Histograms691077
+Node: Updating and accessing 2D histogram elements691782
+Node: Searching 2D histogram ranges695439
+Node: 2D Histogram Statistics696453
+Node: 2D Histogram Operations699318
+Node: Reading and writing 2D histograms701496
+Node: Resampling from 2D histograms705125
+Node: Example programs for 2D histograms708146
+Node: N-tuples709973
+Node: The ntuple struct711296
+Node: Creating ntuples711775
+Node: Opening an existing ntuple file712442
+Node: Writing ntuples713071
+Node: Reading ntuples713532
+Node: Closing an ntuple file713863
+Node: Histogramming ntuple values714203
+Node: Example ntuple programs716213
+Node: Ntuple References and Further Reading719542
+Node: Monte Carlo Integration719863
+Node: Monte Carlo Interface721174
+Node: PLAIN Monte Carlo723801
+Node: MISER726256
+Ref: MISER-Footnote-1732936
+Node: VEGAS733061
+Node: Monte Carlo Examples742622
+Node: Monte Carlo Integration References and Further Reading748609
+Node: Simulated Annealing749391
+Node: Simulated Annealing algorithm750607
+Node: Simulated Annealing functions751759
+Node: Examples with Simulated Annealing756289
+Node: Trivial example756858
+Node: Traveling Salesman Problem759509
+Node: Simulated Annealing References and Further Reading762822
+Node: Ordinary Differential Equations763233
+Node: Defining the ODE System764473
+Node: Stepping Functions767301
+Node: Adaptive Step-size Control774271
+Node: Evolution780348
+Node: Driver784477
+Node: ODE Example programs788711
+Node: ODE References and Further Reading793757
+Node: Interpolation795521
+Node: Introduction to Interpolation796722
+Node: Interpolation Functions797163
+Node: Interpolation Types798370
+Node: Index Look-up and Acceleration801092
+Node: Evaluation of Interpolating Functions803144
+Node: Higher-level Interface805640
+Node: Interpolation Example programs807680
+Node: Interpolation References and Further Reading810900
+Node: Numerical Differentiation811472
+Node: Numerical Differentiation functions812067
+Node: Numerical Differentiation Examples814924
+Node: Numerical Differentiation References816337
+Node: Chebyshev Approximations816888
+Node: Chebyshev Definitions817969
+Node: Creation and Calculation of Chebyshev Series818758
+Node: Auxiliary Functions for Chebyshev Series819743
+Node: Chebyshev Series Evaluation820483
+Node: Derivatives and Integrals821863
+Node: Chebyshev Approximation Examples823101
+Node: Chebyshev Approximation References and Further Reading824597
+Node: Series Acceleration825047
+Node: Acceleration functions825824
+Node: Acceleration functions without error estimation828151
+Node: Example of accelerating a series830775
+Node: Series Acceleration References833121
+Node: Wavelet Transforms834009
+Node: DWT Definitions834608
+Node: DWT Initialization835560
+Node: DWT Transform Functions838208
+Node: DWT in one dimension838759
+Node: DWT in two dimension840780
+Node: DWT Examples845359
+Node: DWT References847176
+Node: Discrete Hankel Transforms849340
+Node: Discrete Hankel Transform Definition849814
+Node: Discrete Hankel Transform Functions852017
+Node: Discrete Hankel Transform References853682
+Node: One dimensional Root-Finding854086
+Node: Root Finding Overview855392
+Node: Root Finding Caveats857248
+Node: Initializing the Solver859017
+Node: Providing the function to solve861650
+Node: Search Bounds and Guesses865204
+Node: Root Finding Iteration866067
+Node: Search Stopping Parameters867918
+Node: Root Bracketing Algorithms870429
+Node: Root Finding Algorithms using Derivatives873727
+Ref: Root Finding Algorithms using Derivatives-Footnote-1877270
+Node: Root Finding Examples877426
+Node: Root Finding References and Further Reading884714
+Node: One dimensional Minimization885353
+Node: Minimization Overview886696
+Node: Minimization Caveats888403
+Node: Initializing the Minimizer889741
+Node: Providing the function to minimize891982
+Node: Minimization Iteration892460
+Node: Minimization Stopping Parameters894598
+Node: Minimization Algorithms896203
+Node: Minimization Examples898797
+Node: Minimization References and Further Reading902431
+Node: Multidimensional Root-Finding902887
+Node: Overview of Multidimensional Root Finding904395
+Node: Initializing the Multidimensional Solver906582
+Node: Providing the multidimensional system of equations to solve909812
+Node: Iteration of the multidimensional solver914724
+Node: Search Stopping Parameters for the multidimensional solver917005
+Node: Algorithms using Derivatives918743
+Node: Algorithms without Derivatives923568
+Node: Example programs for Multidimensional Root finding926658
+Node: References and Further Reading for Multidimensional Root Finding935282
+Node: Multidimensional Minimization936521
+Node: Multimin Overview937931
+Node: Multimin Caveats940011
+Node: Initializing the Multidimensional Minimizer940760
+Node: Providing a function to minimize943994
+Node: Multimin Iteration948055
+Node: Multimin Stopping Criteria950249
+Node: Multimin Algorithms with Derivatives951820
+Node: Multimin Algorithms without Derivatives955351
+Node: Multimin Examples958353
+Node: Multimin References and Further Reading964923
+Node: Least-Squares Fitting965787
+Node: Fitting Overview966873
+Node: Linear regression969206
+Node: Linear fitting without a constant term971808
+Node: Multi-parameter fitting974002
+Node: Robust linear regression979861
+Node: Troubleshooting990109
+Node: Fitting Examples990732
+Node: Fitting References and Further Reading1001256
+Node: Nonlinear Least-Squares Fitting1002629
+Node: Overview of Nonlinear Least-Squares Fitting1004153
+Node: Initializing the Nonlinear Least-Squares Solver1005620
+Node: Providing the Function to be Minimized1008485
+Node: Finite Difference Jacobian1011948
+Node: Iteration of the Minimization Algorithm1013819
+Node: Search Stopping Parameters for Minimization Algorithms1015659
+Node: High Level Driver1017732
+Node: Minimization Algorithms using Derivatives1018638
+Ref: Minimization Algorithms using Derivatives-Footnote-11022086
+Node: Minimization Algorithms without Derivatives1022175
+Node: Computing the covariance matrix of best fit parameters1022567
+Node: Example programs for Nonlinear Least-Squares Fitting1024604
+Node: References and Further Reading for Nonlinear Least-Squares Fitting1032337
+Node: Basis Splines1033073
+Node: Overview of B-splines1033952
+Node: Initializing the B-splines solver1035268
+Node: Constructing the knots vector1036649
+Node: Evaluation of B-spline basis functions1037437
+Node: Evaluation of B-spline basis function derivatives1039085
+Node: Working with the Greville abscissae1041055
+Node: Example programs for B-splines1042049
+Node: References and Further Reading1046044
+Node: Physical Constants1046850
+Node: Fundamental Constants1048429
+Node: Astronomy and Astrophysics1049569
+Node: Atomic and Nuclear Physics1050234
+Node: Measurement of Time1051885
+Node: Imperial Units1052315
+Node: Speed and Nautical Units1052757
+Node: Printers Units1053261
+Node: Volume Area and Length1053584
+Node: Mass and Weight1054270
+Node: Thermal Energy and Power1055089
+Node: Pressure1055512
+Node: Viscosity1056125
+Node: Light and Illumination1056401
+Node: Radioactivity1056993
+Node: Force and Energy1057328
+Node: Prefixes1057732
+Node: Physical Constant Examples1058475
+Node: Physical Constant References and Further Reading1060264
+Node: IEEE floating-point arithmetic1060994
+Node: Representation of floating point numbers1061586
+Node: Setting up your IEEE environment1066072
+Node: IEEE References and Further Reading1073045
+Node: Debugging Numerical Programs1074205
+Node: Using gdb1074722
+Node: Examining floating point registers1078065
+Node: Handling floating point exceptions1079350
+Node: GCC warning options for numerical programs1080762
+Node: Debugging References1084710
+Node: Contributors to GSL1085422
+Node: Autoconf Macros1089916
+Node: GSL CBLAS Library1093948
+Node: Level 1 CBLAS Functions1094488
+Node: Level 2 CBLAS Functions1099790
+Node: Level 3 CBLAS Functions1116420
+Node: GSL CBLAS Examples1126082
+Node: GNU General Public License1127645
+Node: GNU Free Documentation License1165220
+Node: Function Index1190370
+Node: Variable Index1443416
+Node: Type Index1446719
+Node: Concept Index1461788
 
 End Tag Table

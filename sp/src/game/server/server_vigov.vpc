@@ -14,20 +14,12 @@ $Configuration
 {
 	$Compiler
 	{
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\episodic;.\hl2;.\episodic;$SRCDIR\thirdparty\gsl-1.15"	[$WIN32]
-		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\episodic;.\hl2;.\episodic;$SRCDIR\thirdparty\gsl-1.16"	[$POSIX]
 		$PreprocessorDefinitions		"$BASE;HL2_DLL;HL2_EPISODIC;USES_SAVERESTORE;VIGOV_SIMULATOR"
 	}
 }
 
 $Project "Server (Particle Simulator)"
 {
-	$Folder "Libraries"
-	{
-		$File "$SRCDIR\thirdparty\gsl-1.15\build.vc10\lib\Win32\Release\gsl.lib"	[$WIN32]
-		$File "$SRCDIR\thirdparty\gsl-1.16\posixlibs\libgsl.a"						[$POSIX]
-	}
-
 	$Folder	"Source Files"
 	{
 		$File	"ai_eventresponse.cpp"

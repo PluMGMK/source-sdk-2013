@@ -15,6 +15,7 @@
 
 #include <math.h>
 #include <float.h>
+#include "mathlib/vigov_complex.h"
 
 // see http://mathworld.wolfram.com/SphericalTrigonometry.html
 
@@ -69,5 +70,8 @@ float SphericalHarmonic( int nL, int nM, float flTheta, float flPhi );
 // evaluate spherical harmonic with normalized vector direction
 float SphericalHarmonic( int nL, int nM, Vector const &vecDirection );
 
+// VIGoV Complex Number routines
+ComplexNumber CmpSphericalHarmonic( int nL, int nM, float flTheta, float flPhi );
+ComplexNumber CmpSphericalHarmonic( int nL, int nM, Vector const &vecDirection );
 
 #endif // SPHERICAL_GEOMETRY_H

@@ -12,21 +12,17 @@
 #include "Sprite.h"
 #include "mathlib/mathlib.h"
 #include "mathlib/spherical_geometry.h"
+#include "mathlib/vigov_complex.h"
+#include "mathlib/vigov_laguerre.h"
 #include "utlvector.h"
 #include "saverestore_utlvector.h"
 #include "beam_shared.h"
 #include "fmtstr.h"
 
-//GNU Scientific Library:
-#include <gsl/gsl_sf_gamma.h>
-#include <gsl/gsl_sf_hyperg.h>
-#include <gsl/gsl_sf_laguerre.h>
-
-//My own replacements for the above:
-#include "mathlib/vigov_complex.h"
-
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
+
+extern float s_flFactorials[]; //in mathlib/spherical.cpp
 
 static double ALPHA = COULOMB * Square<double>(ELEMENTARY_CHARGE) / (DIRAC * SPD_LGT); //Fine structure constant
 static double A0 = DISTANCE_SCALE * DIRAC / ((ELECTRON_MASS/MASS_SCALE) * SPD_LGT * ALPHA); //The Bohr radius in game units as defined in vigov_sim_defs.h
@@ -755,18 +751,18 @@ float CBaseParticle::GetCharge(float *pflChargeInUnits) {
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: gamma is %.20f\n", entindex(), gamma);}
 	if( k==-n ) {
-		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma)));
-		//double A = 1 / (sqrt(2*n*(n+gamma)) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma))));
+		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * tgamma(2*gamma)));
+		//double A = 1 / (sqrt(2*n*(n+gamma)) * sqrt(C / (gamma * tgamma(2*gamma))));
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: n+gamma is %.20f, rho^gamma is %.20f, e^(-rho/2) is %.20f\n", entindex(), n+gamma, pow(rho, gamma), pow(M_E, -rho/2));}
 		return A * (n+gamma) * pow(rho, gamma) * pow(M_E, -rho/2);
 	}
 	int absk = k>=0 ? k : -k;
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: |k| is %i\n", entindex(), absk);}
-	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
-	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
+	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
+	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
-	return A * pow(r, gamma) * pow(M_E, -rho/2) * ((ZALPHA * rho * gsl_sf_laguerre_n(n-absk-1, 2*gamma + 1, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * gsl_sf_laguerre_n(n-absk, 2*gamma + 1, rho)));
+	return A * pow(r, gamma) * pow(M_E, -rho/2) * ((ZALPHA * rho * GeneralisedLaguerre(n-absk-1, 2*gamma + 1, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * GeneralisedLaguerre(n-absk, 2*gamma + 1, rho)));
 }*/
 
 //In Planck units
@@ -784,17 +780,17 @@ ComplexNumber CBaseParticle::g(int n, int k, double r, float flPotential) {
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: gamma is %.20f\n", entindex(), gamma);}
 	if( k==-n ) {
-		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2.0f*gamma)));
+		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * tgamma(2.0f*gamma)));
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
 		if(debug_wavefunctions.GetBool()){Msg("g on %i: n+gamma is %.20f, rho^gamma is %.20f, e^(-rho/2) is %.20f\n", entindex(), n+gamma, pow(rho, gamma), pow(M_E, -rho/2));}
 		return A * (n+gamma) * pow(rho, gamma) * pow(M_E, -rho/2.0f);
 	}
 	int absk = k>=0 ? k : -k;
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: |k| is %i\n", entindex(), absk);}
-	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY)) + (m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY))) );
-	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
+	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (s_flFactorials[n-absk-1] / tgamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY)) + (m_flTotalEnergy/PLANCK_ENERGY*k / (gamma * m_flRestEnergy/PLANCK_ENERGY))) );
+	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
 	if(debug_wavefunctions.GetBool()){Msg("g on %i: A is %.20f\n", entindex(), A);}
-	return A * pow(r, gamma) * pow(M_E, -rho/2.0f) * ((ZALPHA * rho * gsl_sf_laguerre_n(n-absk-1, 2.0f*gamma + 1.0f, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(PLANCK_ENERGY*C)) * gsl_sf_laguerre_n(n-absk, 2.0f*gamma + 1.0f, rho)));
+	return A * pow(r, gamma) * pow(M_E, -rho/2.0f) * ((ZALPHA * rho * GeneralisedLaguerre(n-absk-1, 2.0f*gamma + 1.0f, rho)) + ((gamma-k) * ((gamma*m_flRestEnergy - k*m_flTotalEnergy)/(PLANCK_ENERGY*C)) * GeneralisedLaguerre(n-absk, 2.0f*gamma + 1.0f, rho)));
 }
 
 /*complex CBaseParticle::f(int n, int k, double r, float flPotential) {
@@ -806,15 +802,15 @@ ComplexNumber CBaseParticle::g(int n, int k, double r, float flPotential) {
 	double rho = 2*C*r; //"Scaled radius"
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if( k==-n ) {
-		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma)));
-		//double A = 1 / (sqrt(2*n*(n+gamma)) * sqrt(C / (gamma * gsl_sf_gamma(2*gamma))));
+		double A = (1 / sqrt(2*n*(n+gamma))) * sqrt(C / (gamma * tgamma(2*gamma)));
+		//double A = 1 / (sqrt(2*n*(n+gamma)) * sqrt(C / (gamma * tgamma(2*gamma))));
 		if(debug_wavefunctions.GetBool()){Msg("f on %i: A is %.20f\n", entindex(), A);}
 		return A * ZALPHA * pow(rho, gamma) * pow(M_E, -rho/2);
 	}
 	int absk = k>=0 ? k : -k;
-	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
-	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
-	return A * pow(rho, gamma) * pow(M_E, -rho/2) * ((gamma-k) * rho * gsl_sf_laguerre_n(n-absk-1, 2*gamma + 1, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * gsl_sf_laguerre_n(n-absk, 2*gamma + 1, rho));
+	double A = (1 / sqrt(2*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
+	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
+	return A * pow(rho, gamma) * pow(M_E, -rho/2) * ((gamma-k) * rho * GeneralisedLaguerre(n-absk-1, 2*gamma + 1, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * GeneralisedLaguerre(n-absk, 2*gamma + 1, rho));
 }*/
 
 //In Planck units
@@ -832,15 +828,15 @@ ComplexNumber CBaseParticle::f(int n, int k, double r, float flPotential) {
 	double gamma = sqrt(Square<int>(k) - Square<double>(ZALPHA));
 	if(debug_wavefunctions.GetBool()){Msg("f on %i: gamma is %.20f\n", entindex(), gamma);}
 	if( k==-n ) {
-		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * gsl_sf_gamma(2.0f*gamma)));
+		double A = (1.0f / sqrt(2.0f*n*(n+gamma))) * sqrt(C / (gamma * tgamma(2.0f*gamma)));
 		if(debug_wavefunctions.GetBool()){Msg("f on %i: A is %.20f\n", entindex(), A);}
 		if(debug_wavefunctions.GetBool()){Msg("f on %i: n+gamma is %.20f, rho^gamma is %.20f, e^(-rho/2) is %.20f\n", entindex(), n+gamma, pow(rho, gamma), pow(M_E, -rho/2));}
 		return A * ZALPHA * pow(rho, gamma) * pow(M_E, -rho/2.0f);
 	}
 	int absk = k>=0 ? k : -k;
-	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
-	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / gsl_sf_gamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
-	return A * pow(rho, gamma) * pow(M_E, -rho/2.0f) * ((gamma-k) * rho * gsl_sf_laguerre_n(n-absk-1, 2.0f*gamma + 1.0f, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * gsl_sf_laguerre_n(n-absk, 2.0f*gamma + 1.0f, rho));
+	double A = (1.0f / sqrt(2.0f*k*(k-gamma))) * sqrt( (C / (n-absk+gamma)) * (s_flFactorials[n-absk-1] / tgamma(n - absk + 2.0f*gamma + 1.0f)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) );
+	//double A = 1 / (sqrt(2*k*(k-gamma)) * sqrt( (C / (n-absk+gamma)) * (gsl_sf_fact(n-absk-1) / tgamma(n - absk + 2*gamma + 1)) * 0.5f*(Square<double>(m_flTotalEnergy*k / (gamma * m_flRestEnergy)) + (m_flTotalEnergy*k / (gamma * m_flRestEnergy))) ));
+	return A * pow(rho, gamma) * pow(M_E, -rho/2.0f) * ((gamma-k) * rho * GeneralisedLaguerre(n-absk-1, 2.0f*gamma + 1.0f, rho) + ZALPHA * ((gamma*ReducedMass()*C_SQ - k*m_flTotalEnergy)/(DIRAC*SPD_LGT * DISTANCE_SCALE*C)) * GeneralisedLaguerre(n-absk, 2.0f*gamma + 1.0f, rho));
 }
 
 ComplexNumber CBaseParticle::Y(int a, int b, Vector &vecDirection) {

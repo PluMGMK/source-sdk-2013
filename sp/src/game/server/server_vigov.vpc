@@ -14,6 +14,7 @@ $Configuration
 {
 	$Compiler
 	{
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\game\shared\hl2;$SRCDIR\game\shared\episodic;.\hl2;.\episodic"
 		$PreprocessorDefinitions		"$BASE;HL2_DLL;HL2_EPISODIC;USES_SAVERESTORE;VIGOV_SIMULATOR"
 	}
 }

@@ -1,6 +1,5 @@
 // © 2014 Michael Keyes
 // An extension of Vector2D to allow it to be used for complex number maths.
-// Hopefully this can let me replace the GSL and play nicely with the rest of Source…
 
 #ifndef VIGOV_COMPLEX_H
 #define VIGOV_COMPLEX_H

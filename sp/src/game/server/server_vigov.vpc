@@ -52,7 +52,6 @@ $Project "Server (Particle Simulator)"
 		{
 			$File	"vigov_simulator\vigov_particles.cpp"
 			$File	"$SRCDIR\game\shared\vigov_sim_defs.h"
-			$File	"vigov_simulator\complex_wrapper.h"
 		}
 
 		$Folder	"HL2 DLL"

@@ -1,6 +1,6 @@
 // This is part of the Subatomic Particle Simulator
 // - Created by VIGoV Interactive
-// - Copyright © 2013 Michael Keyes
+// - Copyright © 2013, 2014, 2015 Michael Keyes
 
 #include "cbase.h"
 #include "vigov_sim_defs.h"
@@ -203,7 +203,7 @@ public:
 
 	int m_iPrincipal; 				//quantum number n - quantised energy
 	int m_iAzimuthal; 				//quantum number l - allowed values for angular momentum
-	int m_iMagnetic;					//quantum number ml - quantised angular momentum
+	int m_iMagnetic;				//quantum number ml - quantised angular momentum
 	float m_flSpinProjection;		//quantum number ms - direction of angular momentum
 	
 	bool m_bFree; //Is this a free particle? Used to make beta particles ignore quantised energy from a time
@@ -263,7 +263,8 @@ public:
 	ComplexNumber Y(int a, int b, Vector &vecDirection); //Spherical harmonic function
 	ComplexNumber Psi(Vector vecLocation); //Particle wavefunction
 	double Psi2(Vector vecLocation); //|Psi|^2
-	double DiagnosticIntegral(int iStart, int iEnd, int iCoarseness);
+	double Integral(int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int iCoarseness);
+	double Probability(Vector vecPos); //Probability of finding particle in unit around this position
 	
 	virtual bool IsElectron(){return false;}
 	virtual bool IsProton(){return false;}
@@ -946,39 +947,49 @@ ComplexNumber CBaseParticle::Psi(Vector vecLocation) {
 }
 
 double CBaseParticle::Psi2(Vector vecLocation) {
-	return Psi(vecLocation).LengthSqr();// / pow(DISTANCE_SCALE/2, 3);
+	return Psi(vecLocation).LengthSqr();
 }
 
 //Integrate |Psi|^2 over a region using the trapezoidal rule
-double CBaseParticle::DiagnosticIntegral(int iStart, int iEnd, int iCoarseness) {
+double CBaseParticle::Integral(int xStart, int yStart, int zStart, int xEnd, int yEnd, int zEnd, int iCoarseness) {
 	double dResult = 0.0f;
 	double dPrevX = 0.0f;
 	double dCurX = 0.0f;
-	for(int x=iStart; x<=iEnd; x+=iCoarseness) {
+	for(int x=xStart; x<=xEnd; x+=iCoarseness) {
 		double dPrevY = 0.0f;
 		double dCurY = 0.0f;
-		for(int y=iStart; y<=iEnd; y+=iCoarseness) {
+		for(int y=yStart; y<=yEnd; y+=iCoarseness) {
 			double dPrevZ = 0.0f;
 			double dCurZ = 0.0f;
-			for(int z=iStart; z<=iEnd; z+=iCoarseness) {
+			for(int z=zStart; z<=zEnd; z+=iCoarseness) {
 				dCurZ = Psi2(Vector(x,y,z));
-				dCurY += iCoarseness * (dCurZ + dPrevZ) / 2;
+				dCurY += iCoarseness * (dCurZ + dPrevZ) / 2.0f;// / DISTANCE_SCALE; // Integrating pdf – must scale properly (not sure why, ask me again next week!)
+				if(debug_wavefunctions.GetBool()){Msg("Integral on %i: dCurZ is %.20f, dPrevZ is %.20f\n", entindex(), dCurZ, dPrevZ);}
 				dPrevZ = dCurZ;
 			}
 			//Msg("Finished a line\n");
-			dCurX += iCoarseness * (dCurY + dPrevY) / 2;
+			dCurX += iCoarseness * (dCurY + dPrevY) / 2.0f;// / DISTANCE_SCALE;
+			if(debug_wavefunctions.GetBool()){Msg("Integral on %i: dCurY is %.20f, dPrevY is %.20f\n", entindex(), dCurY, dPrevY);}
 			dPrevY = dCurY;
 			dCurY = 0.0f;
 		}
 		//Msg("Finished a plane\n");
-		dResult += iCoarseness * (dCurX + dPrevX) / 2;
+		dResult += iCoarseness * (dCurX + dPrevX) / 2.0f;// / DISTANCE_SCALE;
+		if(debug_wavefunctions.GetBool()){Msg("Integral on %i: dCurX is %.20f, dPrevX is %.20f\n", entindex(), dCurX, dPrevX);}
 		dPrevX = dCurX;
 		dCurX = 0.0f;
 	}
 	return dResult;
 }
 
-static void GlobalDiagnosticIntegral(const CCommand &args) {
+double CBaseParticle::Probability(Vector vecPos) {
+	int x = floor(vecPos.x);
+	int y = floor(vecPos.y);
+	int z = floor(vecPos.z);
+	return Integral(x, y, z, x+1, y+1, z+1, 1);
+}
+
+static void GlobalIntegral(const CCommand &args) {
 	int iStart = -4096;
 	int iEnd = 4096;
 	if(args.ArgC() > 1 && atoi(args.Arg(1))) {
@@ -1015,9 +1026,9 @@ static void GlobalDiagnosticIntegral(const CCommand &args) {
 			iParticleIndex++;
 		}
 	}
-	Msg("Diagnostic Integral of electron %i returned %.20f\n", pElectron->entindex(), pElectron->DiagnosticIntegral(iStart, iEnd, iCoarseness));
+	Msg("Diagnostic Integral of electron %i returned %.20f\n", pElectron->entindex(), pElectron->Integral(iStart, iStart, iStart, iEnd, iEnd, iEnd, iCoarseness));
 }
-static ConCommand diagnostic_integral("diagnostic_integral", GlobalDiagnosticIntegral, "Integrates |Psi|^2 of the first electron in the global vector over space specified");
+static ConCommand diagnostic_integral("diagnostic_integral", GlobalIntegral, "Integrates |Psi|^2 of the first electron in the global vector over space specified");
 
 class CPhoton : public CBaseParticle { //Massless particle
 	DECLARE_CLASS(CPhoton, CBaseParticle);
@@ -1364,7 +1375,7 @@ void CElectron::ApplyParticlePhysics() {
 			m_vecMomentum *= dPermittedMomentum; //This is the value we'll give to the wave function - same direction, but updated magnitude
 			vecForce += m_vecMomentum * MASS_SCALE;
 			
-			dFinalProbability = Psi2(vNextPosition + GetLocalOrigin());
+			dFinalProbability = Probability(vNextPosition + GetLocalOrigin());
 		} else {
 			//What we have to do here is:
 			//-pick a few random points to go
@@ -1410,9 +1421,9 @@ void CElectron::ApplyParticlePhysics() {
 			VectorNormalize(m_vecMomentum);
 			m_vecMomentum *= dPermittedMomentum; //This is the value we'll give to the wave function - same direction, but updated magnitude according to quantised energy
 			
-			double pdProbabilities[3] = {Psi2(*ppAcceptedDirections[0]/25 + GetLocalOrigin()), //The division by 25 gives us the location it'd be at that velocity by our next think
-											Psi2(*ppAcceptedDirections[1]/25 + GetLocalOrigin()),
-											Psi2(*ppAcceptedDirections[2]/25 + GetLocalOrigin())};
+			double pdProbabilities[3] = {Probability(*ppAcceptedDirections[0]/25 + GetLocalOrigin()), //The division by 25 gives us the location it'd be at that velocity by our next think
+											Probability(*ppAcceptedDirections[1]/25 + GetLocalOrigin()),
+											Probability(*ppAcceptedDirections[2]/25 + GetLocalOrigin())};
 			
 			double dRandom = random->RandomFloat(0.0f, 1e-4); //Random number between 0 and 0.0001
 			int iPossibility = -1;
